@@ -1,6 +1,32 @@
 import React, { Component } from "react";
+import authApiService from "../services/auth-api-service";
+import tokenService from "../services/token-service";
 
 export default class Register extends Component {
+  state = { error: null };
+
+  submitUserSuccess = () => {
+    const { history } = this.props;
+    history.push("/home");
+  };
+
+  handleSubmitUser = (ev) => {
+    ev.preventDefault();
+    this.setState({ error: null });
+    const { userName, password, passwordConfirmation, email } = ev.target;
+    if (password !== passwordConfirmation) {
+      this.setState({ error: "Passwords must match!" });
+    } else {
+      authApiService
+        .postRegister({
+          user_name: userName.value,
+          password: password.value,
+          user_email: email.value,
+        })
+        .then((res) => console.log(res));
+    }
+    console.log(this.state.error);
+  };
   render() {
     return (
       <section>
@@ -15,18 +41,18 @@ export default class Register extends Component {
           How about your bench press one rep max? You can track your
           imporvements for all of them here!
         </p>
-        <form>
+        <form onSubmit={this.handleSubmitUser}>
           <label htmlFor="username">Username</label>
-          <input type="text" id="username" name="username" />
+          <input type="text" id="userName" name="username" />
           <br />
           <label htmlFor="password">Password</label>
           <input type="password" id="password" name="password" />
           <br />
-          <label htmlFor="password-confirmation">Password-confirmation</label>
+          <label htmlFor="passwordConfirmation">Re=enter Password</label>
           <input
             type="password"
-            id="password-confirmation"
-            name="password-confirmation"
+            id="passwordConfirmation"
+            name="passwordConfirmation"
           />
           <br />
           <label htmlFor="email">Email</label>
