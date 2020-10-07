@@ -1,6 +1,34 @@
 import React, { Component } from "react";
+import authApiService from "../services/auth-api-service";
+import tokenService from "../services/token-service";
+import { Link } from "react-router-dom";
 
 export default class LandingPage extends Component {
+  state = { error: null };
+  handleLoginSuccess = () => {
+    const { history } = this.props;
+    history.push("/home");
+  };
+
+  handleSubmit = (ev) => {
+    ev.preventDefault();
+    this.setState({ error: null });
+    const { userName, password } = ev.target;
+    authApiService
+      .postLogin({
+        user_name: userName.value,
+        password: password.value,
+      })
+      .then((res) => {
+        userName.value = "";
+        password.value = "";
+        tokenService.saveAuthToken(res.authToken);
+      })
+      .catch((res) => {
+        this.setState({ error: res.error });
+      });
+    this.handleLoginSuccess();
+  };
   render() {
     return (
       <section>
@@ -17,9 +45,9 @@ export default class LandingPage extends Component {
           </p>
         </div>
         <div>
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <label htmlFor="username">Username</label>
-            <input type="text" id="username" name="username" />
+            <input type="text" id="userName" name="username" />
             <br />
             <label htmlFor="password">Password</label>
             <input type="password" id="password" name="password" />
@@ -27,9 +55,9 @@ export default class LandingPage extends Component {
             <input type="submit" />
           </form>
           <br />
-          <button type="button">Sign Up</button>
-          <br />
-          <button type="button">Forgot password?</button>
+          <Link to={"/register"}>
+            <button>Sign Up!</button>
+          </Link>
         </div>
       </section>
     );
