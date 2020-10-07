@@ -4,6 +4,7 @@ import Header from "./Header/Header";
 import LandingPage from "./LandingPage/LandingPage";
 import Home from "./Home/Home";
 import Register from "./Register/Register";
+import AddMetricForm from "./AddMetricForm/AddMetricForm";
 
 class App extends Component {
   render() {
@@ -17,7 +18,7 @@ class App extends Component {
             <Route exact path={"/"} component={LandingPage} />
             <Route path={"/home"} component={Home} />
             <Route path={"/register"} component={Register} />
-            {/* <Route path ={'/metrics'} component ={AddMetricForm}/> */}
+            <Route path={"/metrics"} component={AddMetricForm} />
           </Switch>
         </main>
       </section>
