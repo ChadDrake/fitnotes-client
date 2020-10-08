@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import authApiService from "../services/auth-api-service";
-import tokenService from "../services/token-service";
+import authApiService from "../../services/auth-api-service";
+import tokenService from "../../services/token-service";
 import { Link } from "react-router-dom";
 
 export default class LandingPage extends Component {

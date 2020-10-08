@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import metricService from "../services/metrics-service";
+import metricService from "../../services/metrics-service";
 
 export default class AddMetricForm extends Component {
   submitMetricSuccess = () => {

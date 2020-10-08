@@ -16,6 +16,17 @@ const progressPointService = {
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
   },
+  getProgressPoints(metricId) {
+    return fetch(`${config.API_ENDPOINT}/progress-points/${metricId}`, {
+      method: "GET",
+      headers: {
+        Authorization: `bearer ${tokenService.getAuthToken()}`,
+        "content-type": "application/json",
+      },
+    }).then((res) =>
+      !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+    );
+  },
 };
 
 export default progressPointService;

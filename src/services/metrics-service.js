@@ -16,6 +16,17 @@ const metricService = {
       !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
     );
   },
+  getUserMetrics() {
+    return fetch(`${config.API_ENDPOINT}/metrics`, {
+      method: "GET",
+      headers: {
+        Authorization: `bearer ${tokenService.getAuthToken()}`,
+        "content-type": "application/json",
+      },
+    }).then((res) =>
+      !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+    );
+  },
 };
 
 export default metricService;

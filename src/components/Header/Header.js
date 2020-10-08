@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import tokenService from "../services/token-service";
+import tokenService from "../../services/token-service";
 
 export default class Nav extends Component {
   render() {
