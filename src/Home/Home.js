@@ -1,6 +1,21 @@
 import React, { Component } from "react";
+import progressPointService from "../services/progress-point-service";
 
 export default class Home extends Component {
+  state = {
+    metric: "98b4ba58-08aa-11eb-adc1-0242ac120002",
+  };
+
+  handleSubmitProgressPoint = (ev) => {
+    const { progressPoint } = ev.target;
+    console.log(this.state.metric);
+    progressPointService
+      .postProgressPoint({
+        metric_id: this.state.metric,
+        value: progressPoint.value,
+      })
+      .then((res) => console.log(res));
+  };
   render() {
     return (
       <section>
@@ -18,9 +33,14 @@ export default class Home extends Component {
             </select>
           </form>
           <p>Graph goes here. Implementing later</p>
-          <form>
-            <label htmlFor="progress-point">Progress Point</label>
-            <input type="text" id="progress-point" name="progress-point" />
+          <form onSubmit={this.handleSubmitProgressPoint}>
+            <label htmlFor="progressPoint">Progress Point</label>
+            <input
+              type="number"
+              step="any"
+              id="progressPoint"
+              name="progressPoint"
+            />
             <input type="submit" />
           </form>
         </div>
