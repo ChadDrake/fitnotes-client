@@ -17,15 +17,12 @@ export default class Register extends Component {
     if (password !== passwordConfirmation) {
       this.setState({ error: "Passwords must match!" });
     } else {
-      authApiService
-        .postRegister({
-          user_name: userName.value,
-          password: password.value,
-          user_email: email.value,
-        })
-        .then((res) => console.log(res));
+      authApiService.postRegister({
+        user_name: userName.value,
+        password: password.value,
+        user_email: email.value,
+      });
     }
-    console.log(this.state.error);
   };
   render() {
     return (
@@ -48,7 +45,7 @@ export default class Register extends Component {
           <label htmlFor="password">Password</label>
           <input type="password" id="password" name="password" />
           <br />
-          <label htmlFor="passwordConfirmation">Re=enter Password</label>
+          <label htmlFor="passwordConfirmation">Re-enter Password</label>
           <input
             type="password"
             id="passwordConfirmation"
