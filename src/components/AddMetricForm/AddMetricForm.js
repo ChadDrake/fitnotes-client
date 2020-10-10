@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import metricService from "../../services/metrics-service";
+import React, { Component } from 'react';
+import metricService from '../../services/metrics-service';
 
 export default class AddMetricForm extends Component {
   submitMetricSuccess = () => {
     const { history } = this.props;
-    history.push("/home");
+    history.push('/home');
   };
 
   handleSubmitMetric = (ev) => {

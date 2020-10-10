@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import authApiService from "../../services/auth-api-service";
-import tokenService from "../../services/token-service";
+import React, { Component } from 'react';
+import authApiService from '../../services/auth-api-service';
+import tokenService from '../../services/token-service';
 
 export default class Register extends Component {
   state = { error: null };
 
   submitUserSuccess = () => {
     const { history } = this.props;
-    history.push("/home");
+    history.push('/home');
   };
 
   handleSubmitUser = (ev) => {
@@ -15,7 +15,7 @@ export default class Register extends Component {
     this.setState({ error: null });
     const { userName, password, passwordConfirmation, email } = ev.target;
     if (password !== passwordConfirmation) {
-      this.setState({ error: "Passwords must match!" });
+      this.setState({ error: 'Passwords must match!' });
     } else {
       authApiService.postRegister({
         user_name: userName.value,

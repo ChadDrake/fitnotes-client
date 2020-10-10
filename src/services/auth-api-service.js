@@ -1,12 +1,12 @@
-import config from "../config";
-import { uuid } from "uuidv4";
+import config from '../config';
+import { uuid } from 'uuidv4';
 
 const authApiService = {
   postLogin(credentials) {
     return fetch(`${config.API_ENDPOINT}/auth/login`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
       },
       body: JSON.stringify(credentials),
     }).then((res) =>
@@ -18,9 +18,9 @@ const authApiService = {
     credentials.id = uuid();
 
     return fetch(`${config.API_ENDPOINT}/auth/register`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
       },
       body: JSON.stringify(credentials),
     }).then((res) =>

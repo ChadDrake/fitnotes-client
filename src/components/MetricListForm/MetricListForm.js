@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 export default class MetricListForm extends Component {
   generateOptions = (optionList) => {

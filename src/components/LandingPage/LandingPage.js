@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import authApiService from "../../services/auth-api-service";
-import tokenService from "../../services/token-service";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import authApiService from '../../services/auth-api-service';
+import tokenService from '../../services/token-service';
+import { Link } from 'react-router-dom';
 
 export default class LandingPage extends Component {
   state = { error: null };
   handleLoginSuccess = () => {
     const { history } = this.props;
-    history.push("/home");
+    history.push('/home');
   };
 
   handleSubmit = (ev) => {
@@ -20,8 +20,8 @@ export default class LandingPage extends Component {
         password: password.value,
       })
       .then((res) => {
-        userName.value = "";
-        password.value = "";
+        userName.value = '';
+        password.value = '';
         tokenService.saveAuthToken(res.authToken);
       })
       .catch((res) => {
@@ -34,7 +34,7 @@ export default class LandingPage extends Component {
       <section>
         <div>
           <p>
-            {" "}
+            {' '}
             Fitnotes is an app for tracking your fitness progress! You can save
             progress points for various metrics, and have them displayed to you
             as a graph. You start with "weight" and "body-fat" metrics as those
@@ -55,7 +55,7 @@ export default class LandingPage extends Component {
             <input type="submit" />
           </form>
           <br />
-          <Link to={"/register"}>
+          <Link to={'/register'}>
             <button>Sign Up!</button>
           </Link>
         </div>
