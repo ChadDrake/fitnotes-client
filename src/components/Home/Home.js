@@ -12,20 +12,14 @@ export default class Home extends Component {
     selectedMetric: {},
   };
 
-  updateProgressPoints = () => {
-    progressPointService.getProgressPoints(this.state.metricId).then((res) => {
+  updateProgressPoints = (metricId) => {
+    progressPointService.getProgressPoints(metricId).then((res) => {
       this.setState({ progressPoints: res });
     });
   };
-
-  defaultState = () => {
-    this.setState({ metricId: this.state.metrics[0].id });
-    this.updateSelectedMetric();
-    this.updateProgressPoints();
-  };
-  updateSelectedMetric = () => {
+  updateSelectedMetric = (metricId) => {
     this.state.metrics.forEach((metric) => {
-      if (metric.id === this.state.metricId) {
+      if (metric.id === metricId) {
         this.setState({ selectedMetric: metric });
       }
     });
@@ -33,25 +27,25 @@ export default class Home extends Component {
   handleFormChange = (ev) => {
     ev.preventDefault();
     this.setState({ metricId: ev.target.value });
-    this.updateSelectedMetric();
-    this.updateProgressPoints();
+    this.updateSelectedMetric(ev.target.value);
+    this.updateProgressPoints(ev.target.value);
   };
   getMetrics = () => {
-    metricService
-      .getUserMetrics()
-      .then((res) => {
-        this.setState({ metrics: res });
-      })
-      .then(() => {
-        this.defaultState();
-      });
+    metricService.getUserMetrics().then((res) => {
+      console.log(res[0]);
+      this.setState({ metrics: res });
+      this.updateSelectedMetric(res[0].id);
+      this.updateProgressPoints(res[0].id);
+    });
   };
   handleSubmitProgressPoint = (ev) => {
+    ev.preventDefault();
     const { progressPoint } = ev.target;
     progressPointService.postProgressPoint({
       metric_id: this.state.metricId,
       value: progressPoint.value,
     });
+    progressPoint.value = '';
   };
   componentDidMount() {
     this.getMetrics();

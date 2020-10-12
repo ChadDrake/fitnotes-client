@@ -19,7 +19,7 @@ export default class Chart extends Component {
       (point) => point.updated_at
     );
     progressPointValues = this.props.progressPoints.map((point) =>
-      parseFloat(point.value)
+      parseInt(point.value)
     );
     this.setState({
       labels: progressPointTimes,
@@ -35,7 +35,11 @@ export default class Chart extends Component {
   componentDidMount() {
     this.fillGraph();
   }
-
+  componentDidUpdate(prevProps) {
+    if (this.props.metric.id !== prevProps.metric.id) {
+      this.fillGraph();
+    }
+  }
   render() {
     return (
       <div>
