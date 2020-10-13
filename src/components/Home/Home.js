@@ -3,6 +3,7 @@ import progressPointService from '../../services/progress-point-service';
 import metricService from '../../services/metrics-service';
 import MetricListForm from '../MetricListForm/MetricListForm';
 import Chart from '../Chart/Chart';
+import Context from '../../Context/Context';
 
 export default class Home extends Component {
   state = {
@@ -51,38 +52,50 @@ export default class Home extends Component {
     this.getMetrics();
   }
   render() {
-    if (this.state.progressPoints.length !== 0) {
-      return (
-        <section>
-          <div>
-            <p>
-              Hello user who just logged in! Im being a bit verbose here because
-              I dont know your name.
-            </p>
-            <br />
-            <MetricListForm
-              metrics={this.state.metrics}
-              handleChange={this.handleFormChange}
-            />
+    const value = {
+      data: {
+        labels: [this.state.progressPoints.map((point) => point.updated_at)],
+        datasets: [
+          {
+            label: this.state.selectedMetric.measurement_type,
+            data: this.state.progressPoints.map((point) =>
+              parseInt(point.value)
+            ),
+          },
+        ],
+      },
+    };
+
+    return (
+      <section>
+        <div>
+          <p>
+            Hello user who just logged in! Im being a bit verbose here because I
+            dont know your name.
+          </p>
+          <br />
+          <MetricListForm
+            metrics={this.state.metrics}
+            handleChange={this.handleFormChange}
+          />
+          <Context.Provider value={value}>
             <Chart
               metric={this.state.selectedMetric}
               progressPoints={this.state.progressPoints}
             />
-            <form onSubmit={this.handleSubmitProgressPoint}>
-              <label htmlFor="progressPoint">Progress Point</label>
-              <input
-                type="number"
-                step="any"
-                id="progressPoint"
-                name="progressPoint"
-              />
-              <input type="submit" />
-            </form>
-          </div>
-        </section>
-      );
-    } else {
-      return null;
-    }
+          </Context.Provider>
+          <form onSubmit={this.handleSubmitProgressPoint}>
+            <label htmlFor="progressPoint">Progress Point</label>
+            <input
+              type="number"
+              step="any"
+              id="progressPoint"
+              name="progressPoint"
+            />
+            <input type="submit" />
+          </form>
+        </div>
+      </section>
+    );
   }
 }

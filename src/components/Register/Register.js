@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import authApiService from '../../services/auth-api-service';
-import tokenService from '../../services/token-service';
 
 export default class Register extends Component {
   state = { error: null };
