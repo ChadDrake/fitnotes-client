@@ -11,7 +11,6 @@ export default class Home extends Component {
     metricId: '',
     selectedMetric: {},
   };
-
   updateProgressPoints = (metricId) => {
     progressPointService.getProgressPoints(metricId).then((res) => {
       this.setState({ progressPoints: res });
@@ -31,19 +30,28 @@ export default class Home extends Component {
     this.updateProgressPoints(ev.target.value);
   };
   getMetrics = () => {
-    metricService.getUserMetrics().then((res) => {
-      this.setState({ metrics: res });
-      this.updateSelectedMetric(res[0].id);
-      this.updateProgressPoints(res[0].id);
-    });
+    metricService
+      .getUserMetrics()
+      .then((res) => {
+        this.setState({ metrics: res });
+        this.updateSelectedMetric(res[0].id);
+        this.updateProgressPoints(res[0].id);
+      })
+      .catch((res) => {
+        this.setState({ error: res.error });
+      });
   };
   handleSubmitProgressPoint = (ev) => {
     ev.preventDefault();
     const { progressPoint } = ev.target;
-    progressPointService.postProgressPoint({
-      metric_id: this.state.metricId,
-      value: progressPoint.value,
-    });
+    progressPointService
+      .postProgressPoint({
+        metric_id: this.state.metricId,
+        value: progressPoint.value,
+      })
+      .catch((res) => {
+        this.setState({ error: res.error });
+      });
     progressPoint.value = '';
   };
   componentDidMount() {
@@ -67,6 +75,7 @@ export default class Home extends Component {
             dont know your name.
           </p>
           <br />
+          {this.state.error}
           <MetricListForm
             metrics={this.state.metrics}
             handleChange={this.handleFormChange}

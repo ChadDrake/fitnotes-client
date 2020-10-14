@@ -24,10 +24,12 @@ export default class LandingPage extends Component {
         password.value = '';
         tokenService.saveAuthToken(res.authToken);
       })
+      .then(() => {
+        this.handleLoginSuccess();
+      })
       .catch((res) => {
         this.setState({ error: res.error });
       });
-    this.handleLoginSuccess();
   };
   render() {
     return (
@@ -45,6 +47,7 @@ export default class LandingPage extends Component {
           </p>
         </div>
         <div>
+          <p>{this.state.error}</p>
           <form onSubmit={this.handleSubmit}>
             <label htmlFor="username">Username</label>
             <input type="text" id="userName" name="username" />
@@ -52,6 +55,7 @@ export default class LandingPage extends Component {
             <label htmlFor="password">Password</label>
             <input type="password" id="password" name="password" />
             <br />
+
             <input type="submit" />
           </form>
           <br />

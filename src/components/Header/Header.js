@@ -13,9 +13,11 @@ export default class Nav extends Component {
         <Link to="metrics">
           <button type="button">Add New Metric</button>
         </Link>
-        <button onClick={tokenService.clearAuthToken} type="button">
-          Logout
-        </button>
+        <Link to="/">
+          <button onClick={tokenService.clearAuthToken} type="button">
+            Logout
+          </button>
+        </Link>
       </section>
     );
   }

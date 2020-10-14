@@ -13,14 +13,18 @@ export default class Register extends Component {
     ev.preventDefault();
     this.setState({ error: null });
     const { userName, password, passwordConfirmation, email } = ev.target;
-    if (password !== passwordConfirmation) {
+    if (password.value !== passwordConfirmation.value) {
       this.setState({ error: 'Passwords must match!' });
     } else {
-      authApiService.postRegister({
-        user_name: userName.value,
-        password: password.value,
-        user_email: email.value,
-      });
+      authApiService
+        .postRegister({
+          user_name: userName.value,
+          password: password.value,
+          user_email: email.value,
+        })
+        .catch((res) => {
+          this.setState({ error: res.error });
+        });
     }
   };
   render() {
@@ -37,6 +41,7 @@ export default class Register extends Component {
           How about your bench press one rep max? You can track your
           imporvements for all of them here!
         </p>
+        <p>{this.state.error}</p>
         <form onSubmit={this.handleSubmitUser}>
           <label htmlFor="username">Username</label>
           <input type="text" id="userName" name="username" />

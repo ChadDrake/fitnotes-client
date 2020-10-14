@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import metricService from '../../services/metrics-service';
 
 export default class AddMetricForm extends Component {
+  state = { error: null };
   submitMetricSuccess = () => {
     const { history } = this.props;
     history.push('/home');
@@ -15,7 +16,9 @@ export default class AddMetricForm extends Component {
         metric_name: metricName.value,
         measurement_type: measurementType.value,
       })
-      .then((res) => console.log(res));
+      .catch((res) => {
+        this.setState({ error: res.error });
+      });
     this.submitMetricSuccess();
   };
 
@@ -24,6 +27,7 @@ export default class AddMetricForm extends Component {
       <section>
         <h2>New Metric</h2>
         <div>
+          <p>{this.state.error}</p>
           <form onSubmit={this.handleSubmitMetric}>
             <label htmlFor="metricName">Name of Metric</label>
             <input type="text" id="metricName" name="metricName" />
