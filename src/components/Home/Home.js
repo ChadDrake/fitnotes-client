@@ -3,7 +3,6 @@ import progressPointService from '../../services/progress-point-service';
 import metricService from '../../services/metrics-service';
 import MetricListForm from '../MetricListForm/MetricListForm';
 import Chart from '../Chart/Chart';
-import Context from '../../Context/Context';
 
 export default class Home extends Component {
   state = {
@@ -33,7 +32,6 @@ export default class Home extends Component {
   };
   getMetrics = () => {
     metricService.getUserMetrics().then((res) => {
-      console.log(res[0]);
       this.setState({ metrics: res });
       this.updateSelectedMetric(res[0].id);
       this.updateProgressPoints(res[0].id);
@@ -52,20 +50,15 @@ export default class Home extends Component {
     this.getMetrics();
   }
   render() {
-    const value = {
-      data: {
-        labels: [this.state.progressPoints.map((point) => point.updated_at)],
-        datasets: [
-          {
-            label: this.state.selectedMetric.measurement_type,
-            data: this.state.progressPoints.map((point) =>
-              parseInt(point.value)
-            ),
-          },
-        ],
-      },
+    const data = {
+      labels: [this.state.progressPoints.map((point) => point.updated_at)],
+      datasets: [
+        {
+          label: this.state.selectedMetric.measurement_type,
+          data: this.state.progressPoints.map((point) => parseInt(point.value)),
+        },
+      ],
     };
-
     return (
       <section>
         <div>
@@ -78,12 +71,8 @@ export default class Home extends Component {
             metrics={this.state.metrics}
             handleChange={this.handleFormChange}
           />
-          <Context.Provider value={value}>
-            <Chart
-              metric={this.state.selectedMetric}
-              progressPoints={this.state.progressPoints}
-            />
-          </Context.Provider>
+
+          <Chart metric={this.state.selectedMetric} data={data} />
           <form onSubmit={this.handleSubmitProgressPoint}>
             <label htmlFor="progressPoint">Progress Point</label>
             <input
