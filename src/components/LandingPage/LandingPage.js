@@ -44,7 +44,9 @@ export default class LandingPage extends Component {
             are very common, but you also have the ability to create your own
             things! Do you want to know how many push-ups you can do? How far
             you can run? How about your bench press one rep max? You can track
-            your imporvements for all of them here!
+            your imporvements for all of them here! To try the App out before
+            signing up, simply login with the username "demouser" and the
+            password "P@ssword1".
           </p>
         </div>
         <div>
