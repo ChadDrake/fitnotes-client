@@ -12,12 +12,12 @@ export default class MetricListForm extends Component {
   };
   render() {
     return (
-      <form onChange={this.props.handleChange}>
+      <div>
         <label htmlFor="metric">Choose what progress metric to see</label>
-        <select name="metric" id="metric">
+        <select onChange={this.props.handleChange} name="metric" id="metric">
           {this.generateOptions(this.props.metrics)}
         </select>
-      </form>
+      </div>
     );
   }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import authApiService from '../../services/auth-api-service';
-
+import './Register.css';
 export default class Register extends Component {
   state = { error: null };
 
@@ -29,7 +29,7 @@ export default class Register extends Component {
   };
   render() {
     return (
-      <section>
+      <section className="Register">
         <h2> Sign Up! </h2>
         <br />
         <p>
@@ -41,15 +41,18 @@ export default class Register extends Component {
           How about your bench press one rep max? You can track your
           imporvements for all of them here!
         </p>
-        <p>{this.state.error}</p>
-        <form onSubmit={this.handleSubmitUser}>
+        <p className="error">{this.state.error}</p>
+        <form className="register-form" onSubmit={this.handleSubmitUser}>
           <label htmlFor="username">Username</label>
+          <br />
           <input type="text" id="userName" name="username" />
           <br />
           <label htmlFor="password">Password</label>
+          <br />
           <input type="password" id="password" name="password" />
           <br />
           <label htmlFor="passwordConfirmation">Re-enter Password</label>
+          <br />
           <input
             type="password"
             id="passwordConfirmation"
@@ -57,6 +60,7 @@ export default class Register extends Component {
           />
           <br />
           <label htmlFor="email">Email</label>
+          <br />
           <input type="text" id="email" name="email" />
           <br />
           <input type="submit" />

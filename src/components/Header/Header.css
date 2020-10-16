@@ -1,0 +1,20 @@
+.Header-container {
+  width: 70vw;
+  display: flex;
+  flex-direction: column;
+  background-color: #ccddd3;
+  justify-content: center;
+  align-items: center;
+  border: 5px solid #f6ae2d;
+}
+.button-container {
+  display: flex;
+  padding-bottom: 10px;
+  width: 50vw;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.h1 {
+  justify-items: center;
+}

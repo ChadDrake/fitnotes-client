@@ -1,10 +1,11 @@
 import config from '../config';
-import { uuid } from 'uuidv4';
+import { v4 as uuid } from 'uuid';
 import tokenService from './token-service';
 
 const progressPointService = {
   postProgressPoint(progressPoint) {
     progressPoint.id = uuid();
+    console.log(progressPoint);
     return fetch(`${config.API_ENDPOINT}/progress-points`, {
       method: 'POST',
       headers: {

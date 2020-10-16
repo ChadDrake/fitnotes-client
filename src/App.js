@@ -7,6 +7,7 @@ import Register from './components/Register/Register';
 import AddMetricForm from './components/AddMetricForm/AddMetricForm';
 import PublicOnlyRoute from './components/Utils/PublicOnlyRoute';
 import PrivateRoute from './components/Utils/PrivateRoute';
+import './App.css';
 
 class App extends Component {
   state = { hasError: false };
@@ -17,11 +18,11 @@ class App extends Component {
   }
   render() {
     return (
-      <section>
-        <header>
+      <section className="full-page">
+        <header className="Header">
           <Header />
         </header>
-        <main>
+        <main className="App">
           <Switch>
             <PublicOnlyRoute exact path={'/'} component={LandingPage} />
             <PrivateRoute path={'/home'} component={Home} />

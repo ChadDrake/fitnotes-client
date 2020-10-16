@@ -3,6 +3,7 @@ import progressPointService from '../../services/progress-point-service';
 import metricService from '../../services/metrics-service';
 import MetricListForm from '../MetricListForm/MetricListForm';
 import Chart from '../Chart/Chart';
+import './Home.css';
 
 export default class Home extends Component {
   state = {
@@ -33,7 +34,7 @@ export default class Home extends Component {
     metricService
       .getUserMetrics()
       .then((res) => {
-        this.setState({ metrics: res });
+        this.setState({ metrics: res, metricId: res[0].id });
         this.updateSelectedMetric(res[0].id);
         this.updateProgressPoints(res[0].id);
       })
@@ -49,6 +50,9 @@ export default class Home extends Component {
         metric_id: this.state.metricId,
         value: progressPoint.value,
       })
+      .then((res) =>
+        this.setState({ progressPoints: [...this.state.progressPoints, res] })
+      )
       .catch((res) => {
         this.setState({ error: res.error });
       });
@@ -59,7 +63,9 @@ export default class Home extends Component {
   }
   render() {
     const data = {
-      labels: [this.state.progressPoints.map((point) => point.updated_at)],
+      labels: this.state.progressPoints.map((point) =>
+        new Date(point.updated_at).toLocaleDateString()
+      ),
       datasets: [
         {
           label: this.state.selectedMetric.measurement_type,
@@ -69,20 +75,27 @@ export default class Home extends Component {
     };
     return (
       <section>
-        <div>
-          <p>
-            Hello user who just logged in! Im being a bit verbose here because I
-            dont know your name.
-          </p>
-          <br />
-          {this.state.error}
-          <MetricListForm
-            metrics={this.state.metrics}
-            handleChange={this.handleFormChange}
-          />
+        <div className="home">
+          <div>
+            <p>
+              Hello! Heres how you've been doing! Would you like to add a new
+              metric or a progress point?
+            </p>
+          </div>
 
-          <Chart metric={this.state.selectedMetric} data={data} />
-          <form onSubmit={this.handleSubmitProgressPoint}>
+          <div>
+            <p className="error">{this.state.error}</p>
+            <MetricListForm
+              metrics={this.state.metrics}
+              handleChange={this.handleFormChange}
+            />
+          </div>
+
+          <div>
+            <Chart metric={this.state.selectedMetric} data={data} />
+          </div>
+
+          <form className="home-form" onSubmit={this.handleSubmitProgressPoint}>
             <label htmlFor="progressPoint">Progress Point</label>
             <input
               type="number"

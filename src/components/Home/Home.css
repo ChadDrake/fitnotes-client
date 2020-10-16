@@ -1,0 +1,12 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  width: 70vw;
+  /* height: 70vh; */
+  background-color: #ccddd3;
+  border: 5px solid #f6ae2d;
+  padding-left: 0.9em;
+}
+.home-form {
+  padding-bottom: 0.9em;
+}

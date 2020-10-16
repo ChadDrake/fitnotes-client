@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import authApiService from '../../services/auth-api-service';
 import tokenService from '../../services/token-service';
 import { Link } from 'react-router-dom';
+import './LandingPage.css';
 
 export default class LandingPage extends Component {
   state = { error: null };
@@ -33,7 +34,7 @@ export default class LandingPage extends Component {
   };
   render() {
     return (
-      <section>
+      <section className="LandingPage">
         <div>
           <p>
             {' '}
@@ -47,8 +48,8 @@ export default class LandingPage extends Component {
           </p>
         </div>
         <div>
-          <p>{this.state.error}</p>
-          <form onSubmit={this.handleSubmit}>
+          <p className="error">{this.state.error}</p>
+          <form className="landing-page-form" onSubmit={this.handleSubmit}>
             <label htmlFor="username">Username</label>
             <input type="text" id="userName" name="username" />
             <br />
@@ -56,11 +57,10 @@ export default class LandingPage extends Component {
             <input type="password" id="password" name="password" />
             <br />
 
-            <input type="submit" />
+            <input className="button" type="submit" />
           </form>
-          <br />
           <Link to={'/register'}>
-            <button>Sign Up!</button>
+            <button className="button">Sign Up!</button>
           </Link>
         </div>
       </section>

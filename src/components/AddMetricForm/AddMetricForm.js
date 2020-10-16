@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import metricService from '../../services/metrics-service';
+import './AddMetricForm.css';
 
 export default class AddMetricForm extends Component {
   state = { error: null };
@@ -24,19 +25,20 @@ export default class AddMetricForm extends Component {
 
   render() {
     return (
-      <section>
-        <h2>New Metric</h2>
+      <section className="AddMetricForm">
         <div>
-          <p>{this.state.error}</p>
-          <form onSubmit={this.handleSubmitMetric}>
-            <label htmlFor="metricName">Name of Metric</label>
-            <input type="text" id="metricName" name="metricName" />
-            <label htmlFor="measurementType">Measured in:</label>
-            <input type="text" id="measurementType" name="measurementType" />
-            <br />
-            <input type="submit" />
-          </form>
+          <h2>New Metric</h2>
         </div>
+
+        <p className="error">{this.state.error}</p>
+        <form className="form" onSubmit={this.handleSubmitMetric}>
+          <label htmlFor="metricName">Name of Metric</label>
+          <input type="text" id="metricName" name="metricName" />
+          <label htmlFor="measurementType">Measured in:</label>
+          <input type="text" id="measurementType" name="measurementType" />
+          <br />
+          <input className={'submit'} type="submit" />
+        </form>
       </section>
     );
   }

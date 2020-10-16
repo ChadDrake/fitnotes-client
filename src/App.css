@@ -1,0 +1,25 @@
+.App {
+  background-color: #357ded;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+
+.Header {
+  padding: 20px;
+  display: flex;
+  background-color: #357ded;
+  justify-content: center;
+  align-items: center;
+}
+.full-page {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+* {
+  color: #1c1c1c;
+}
+.error {
+  color: #e02500;
+}
