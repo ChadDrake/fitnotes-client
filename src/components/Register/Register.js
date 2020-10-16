@@ -6,7 +6,7 @@ export default class Register extends Component {
 
   submitUserSuccess = () => {
     const { history } = this.props;
-    history.push('/home');
+    history.push('/');
   };
 
   handleSubmitUser = (ev) => {
@@ -22,6 +22,7 @@ export default class Register extends Component {
           password: password.value,
           user_email: email.value,
         })
+        .then(this.submitUserSuccess)
         .catch((res) => {
           this.setState({ error: res.error });
         });
