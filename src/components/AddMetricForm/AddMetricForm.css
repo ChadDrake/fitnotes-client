@@ -18,5 +18,6 @@
   flex-direction: column;
 }
 .submit {
+  padding-right: 50px;
   width: 10vw;
 }
