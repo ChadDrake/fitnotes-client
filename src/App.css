@@ -1,14 +1,12 @@
 .App {
-  background-color: #357ded;
   display: flex;
   justify-content: center;
-  height: 100vh;
 }
 
 .Header {
   padding: 20px;
   display: flex;
-  background-color: #357ded;
+
   justify-content: center;
   align-items: center;
 }
@@ -16,6 +14,8 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  background-color: #357ded;
+  min-height: 100vh;
 }
 * {
   color: #1c1c1c;
