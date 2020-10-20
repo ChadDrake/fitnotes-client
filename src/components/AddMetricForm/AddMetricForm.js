@@ -37,7 +37,7 @@ export default class AddMetricForm extends Component {
           <label htmlFor="measurementType">Measured in:</label>
           <input type="text" id="measurementType" name="measurementType" />
           <br />
-          <input className={'submit'} type="submit" />
+          <input className={'submit'} type="submit" value="Submit" />
         </form>
       </section>
     );

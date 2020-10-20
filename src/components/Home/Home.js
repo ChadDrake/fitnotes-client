@@ -103,7 +103,7 @@ export default class Home extends Component {
               id="progressPoint"
               name="progressPoint"
             />
-            <input type="submit" />
+            <input type="submit" value="Submit" />
           </form>
         </div>
       </section>

@@ -64,7 +64,7 @@ export default class Register extends Component {
           <br />
           <input type="text" id="email" name="email" />
           <br />
-          <input type="submit" />
+          <input type="submit" value="Submit" />
         </form>
       </section>
     );

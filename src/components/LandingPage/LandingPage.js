@@ -52,14 +52,14 @@ export default class LandingPage extends Component {
         <div>
           <p className="error">{this.state.error}</p>
           <form className="landing-page-form" onSubmit={this.handleSubmit}>
-            <label htmlFor="username">Username</label>
-            <input type="text" id="userName" name="username" />
+            <label htmlFor="userName">Username</label>
+            <input type="text" id="userName" name="userName" />
             <br />
             <label htmlFor="password">Password</label>
             <input type="password" id="password" name="password" />
             <br />
 
-            <input className="button" type="submit" />
+            <input className="button" type="submit" value="Submit" />
           </form>
           <Link to={'/register'}>
             <button className="button">Sign Up!</button>
