@@ -7,4 +7,4 @@ This is a client for the fitnotes server. The app allows a user to upload progre
 ![Fitnotes-Home](/images/Fitnotes-Home.PNG)
 
 TECHNOLOGY
-React, Jest, enzyme
+React, Jest, Enzyme
